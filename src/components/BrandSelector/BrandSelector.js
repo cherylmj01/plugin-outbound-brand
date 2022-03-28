@@ -19,8 +19,6 @@ class BrandSelector extends React.Component {
     render() {
         let callerIds = this.props.numberList;
 
-        console.log('TestHello10',this.props);
-
         let callerIdsArray = []
         for (let m in callerIds) {
             callerIdsArray.push(m)

@@ -40,7 +40,35 @@ From commandline run: `twilio profiles:use PROFILE_NAME`
 
 This plugin will allow you to make outbound calls through your brands. The brand and it's asscociated numbers will be populated as an asset in Twilio console.
 
-## Step 1: Download Plugin Code
+## Step 1: Add an Asset file containing the brand and it's numbers
+
+1. Create an Asset file and name it `BrandNumbers.json`
+2. Within this file add the brand and their corresponding number as shown below: 
+    ```bash
+    {
+    "GreenDot": "Add a valid registered number for GreenDot",
+    "Walmart": "Add a valid registered number for Walmart",
+    "Target": "Add a valid registered number for Target"
+    }
+    ```
+    Here is an example of what this file would look with actual data : 
+
+    ```bash
+    {
+    "GreenDot": "+19382010447",
+    "Walmart": "+17622635405",
+    "Target": "+16789045659"
+}
+    ```
+
+3. Go to your flex console >> Search for `Assets`.
+4. Add this file that you created above as an Assets.
+5. Once the Asset is deployed, copy the URL of the Assets. Please refer the screenshot below : 
+![Assets screenshot](./resources/Assets.png) 
+
+6. Paste this URL in the file named `BrandNumberState.js` which can be found under the state folder in this repository
+
+## Step 2: Download Plugin Code
 
 > :information_source: If you've used the Twilio CLI to create a Flex Plugin from scratch, you can skip Step 1.
 
@@ -52,19 +80,19 @@ GitHub provides several options for downloading this source code:
 - Clone the code via [HTTPS, SSH, or GitHub CLI](https://github.com/cherylmj01/plugin-outbound-brand.git)
 - Download a zip file of this code.
 
-## Step 2: Install Dependencies
+## Step 3: Install Dependencies
 
 1. Once the plugin code has been downloaded to your development environment, open a Command Line interface and `cd` into the root code directory.
 2. Once in the root plugin code directory run the following in Command Line: `npm install` or `npm i`
 3. All of the code dependencies are installed and you may now start building and running your code locally.
 
-## Step 3: Run Plugin Locally
+## Step 4: Run Plugin Locally
 
 1. This plugin can be run locally in your default browser by running the following in Command Line: `twilio flex:plugins:start`
 2. You will be prompted to login. At this point you can select to use your Twilio login to log into Flex.
 3. Once logged into Flex you will see that Flex will be running on `localhost:3000` in your browser.
 
-## Step 4: Deploy and Release Plugin to Twilio
+## Step 5: Deploy and Release Plugin to Twilio
 
 The `twilio flex:plugins:deploy` command automates the process of uploading your plugin to Flex. This allows you to deploy your plugins via the command line, without needing to manually upload them using a GUI. After a deploy, your plugin is not yet enabled for all your users on your Flex application. You need to run the `release` command after the deploy to enable any changes.
 

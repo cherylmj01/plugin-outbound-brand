@@ -24,17 +24,14 @@ export default class OutboundBrandPlugin extends FlexPlugin {
    */
   async init(flex, manager) {
     this.registerReducers(manager);
+    registerCustomNotifications(flex, manager); 
     
-    // flex.AgentDesktopView.Panel1.Content.add(<OutboundCallerContainer key="Test1234111211" />)
-    console.log("TEST123123123")
     flex.OutboundDialerPanel.Content.add(
       <BrandSelectorContainer key="number-selector" />,
       { sortOrder: 1 }
     );
 
-     // replace -> can only do in one plugin
-     // listener to start beforeStartOutbound
-
+    
     flex.Actions.replaceAction("StartOutboundCall", (payload, original) => {
 
       return new Promise((resolve, reject) => {
@@ -43,22 +40,18 @@ export default class OutboundBrandPlugin extends FlexPlugin {
           return;
         }
         if (!manager.store.getState()["outbound-brand"].BrandSelector.isConfirmed){
-          //reject("CallerId not confirmed, will show interface");
-          console.log('Error in notification');
-          registerCustomNotifications(flex, manager)
           Notifications.showNotification(CustomNotifications.BrandNotification,null);
+          reject("Brand is not selected to make a call!");
         }
         resolve(
           manager.store.getState()["outbound-brand"].BrandSelector.brandsNumber
         );
       }).then((callerId) => {
         original({ ...payload, callerId: callerId });
-      });
-
-
-
+      }); 
       
     });
+
   }
 
   /**
