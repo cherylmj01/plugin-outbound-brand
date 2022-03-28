@@ -1,10 +1,12 @@
 import React from 'react';
-import { VERSION } from '@twilio/flex-ui';
+import { VERSION, Notifications } from '@twilio/flex-ui';
 import { FlexPlugin } from '@twilio/flex-plugin';
 
-//import CustomTaskListContainer from './components/CustomTaskList/CustomTaskList.Container';
 import reducers, { namespace } from './states';
 import BrandSelectorContainer from "./components/BrandSelector/BrandSelector.Container";
+import { CustomNotifications } from './notifications';
+import registerCustomNotifications from './notifications'
+import { Actions } from './states/BrandNumberState';
 
 const PLUGIN_NAME = 'OutboundBrandPlugin';
 
@@ -22,29 +24,29 @@ export default class OutboundBrandPlugin extends FlexPlugin {
    */
   async init(flex, manager) {
     this.registerReducers(manager);
+    
     // flex.AgentDesktopView.Panel1.Content.add(<OutboundCallerContainer key="Test1234111211" />)
+    console.log("TEST123123123")
     flex.OutboundDialerPanel.Content.add(
       <BrandSelectorContainer key="number-selector" />,
       { sortOrder: 1 }
     );
+
      // replace -> can only do in one plugin
      // listener to start beforeStartOutbound
 
     flex.Actions.replaceAction("StartOutboundCall", (payload, original) => {
-
-      // if no brand is called
-
-      // console.log('Cheryluy9898',payload);
 
       return new Promise((resolve, reject) => {
         if (payload.callerId) {
           resolve(payload.callerId);
           return;
         }
-      
         if (!manager.store.getState()["outbound-brand"].BrandSelector.isConfirmed){
-          this.dispatch(Actions.setToNumber(payload.destination));
-          reject("CallerId not confirmed, will show interface");
+          //reject("CallerId not confirmed, will show interface");
+          console.log('Error in notification');
+          registerCustomNotifications(flex, manager)
+          Notifications.showNotification(CustomNotifications.BrandNotification,null);
         }
         resolve(
           manager.store.getState()["outbound-brand"].BrandSelector.brandsNumber
@@ -53,8 +55,10 @@ export default class OutboundBrandPlugin extends FlexPlugin {
         original({ ...payload, callerId: callerId });
       });
 
-    });
 
+
+      
+    });
   }
 
   /**

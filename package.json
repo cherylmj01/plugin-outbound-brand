@@ -7,9 +7,12 @@
   },
   "dependencies": {
     "@twilio/flex-plugin-scripts": "5.0.4",
+    "axios": "^0.26.1",
     "react": "16.5.2",
     "react-dom": "16.5.2",
-    "react-emotion": "9.2.12"
+    "react-emotion": "9.2.12",
+    "redux-dynamic-middlewares": "^2.0.0",
+    "redux-thunk": "^2.4.1"
   },
   "devDependencies": {
     "@twilio/flex-ui": "^1",

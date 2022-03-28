@@ -1,23 +1,25 @@
-import BrandSelector from './BrandSelector';
+// Import redux methods
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
+
+// Import the Redux Actions and Component
 import { Actions } from '../../states/BrandNumberState';
+import BrandSelector from './BrandSelector';
 
 
-
-// const mapStateToProps = (state) => ({
-//     brand: state['outbound-brand'].OutboundCaller.brand,
-//   });
-
-const mapStateToProps = (state) => ({
-  brandsNumber: state["outbound-brand"].BrandSelector.brandsNumber,
-});
+// Define mapping functions
+const mapStateToProps = (state) => {
+  console.log("TEST123123123123123123 STATE", state)
+  return {
+    selectedBrand: state["outbound-brand"].BrandSelector.brandsNumber,
+    numberList: state["outbound-brand"].BrandSelector.brandNumberList
+  }
+};
   
-  const mapDispatchToProps = (dispatch) => ({
+const mapDispatchToProps = (dispatch) => ({
     updateBrand: bindActionCreators(Actions.updateBrand, dispatch),
-  });
-  
-export default connect(mapStateToProps,mapDispatchToProps)(BrandSelector);
+    getNumbers: bindActionCreators(Actions.getPhoneNumbers, dispatch)
+});
 
-//export default connect(mapDispatchToProps)(BrandSelector);
-// export default BrandSelector;
+// Connect presentational component to Redux
+export default connect(mapStateToProps,mapDispatchToProps)(BrandSelector);

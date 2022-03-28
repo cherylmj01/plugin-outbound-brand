@@ -1,32 +1,49 @@
 const UPDATE_DIALER_BRAND = "UPDATE_BRAND";
 const SET_DIALER_DESTINATION = "DIALER_DESTINATION";
+const GET_PHONE_NUMBER = "GET_PHONE_NUMBER";
 
 const initialState = {
     brandsNumber: {},
     isConfirmed: false,
+    brandNumberList: {},
   };
+
+  function getBrandNumberList() {
+    return fetch('https://scarlet-salmon-5915.twil.io/assets/BrandNumbers.json')
+    .then((response) => response.json())
+    .catch((err) => {
+      return `Error: ${err}`;
+    });
+  }
 
   export class Actions {
 
     static updateBrand = (brand) => ({
       type: UPDATE_DIALER_BRAND,
-      brand,
+      payload: brand,
     });
 
-     static setToBrand= (brand) => ({
+     static setToBrand = (brand) => ({
       type: SET_DIALER_DESTINATION,
-      brand,
+      payload: brand,
+    });
+
+    static getPhoneNumbers = () => ({
+      type: GET_PHONE_NUMBER,
+      payload: getBrandNumberList(),
     });
   }
 
   export function reduce(state = initialState, action) {
+  
+    console.log('Test789',action,action.type);
 
     switch (action.type){
       
       case UPDATE_DIALER_BRAND: {
         return {
           ...state,
-          brandsNumber: action.brand,
+          brandsNumber: action.payload,
           isConfirmed: true,
         };
       }
@@ -34,29 +51,31 @@ const initialState = {
       case SET_DIALER_DESTINATION: {
         return {
           ...state,
-          tobrandsNumber: action.brand,
+          tobrandsNumber: action.payload,
         };
       }
-     
+
+      case `${GET_PHONE_NUMBER}_PENDING`: {
+        return state;
+      }
+
+      case `${GET_PHONE_NUMBER}_FULFILLED`: {
+        console.log("IMPORTANT123123", action)
+        return {
+          ...state,
+          brandNumberList: action.payload,
+        };
+      }
+
+      case `${GET_PHONE_NUMBER}_REJECTED`: {
+        return {
+          ...state,
+          error: action.payload.error,
+        };
+      }
+   
       default:
         return state;      
     }
 
   }
-
-// export const loadData = (data) => {
-//       return{
-//         type:'LOAD_DATA',
-//         payload: data
-//       }; 
-//   };
-
-// export const dataReducer = (value=initialState, action) => {
-//     if(action.type === "LOAD_DATA"){
-//         return{
-//             ...value,
-//             brand: action.payload,
-//         } ;
-//     }
-//     return value;
-// };
