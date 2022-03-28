@@ -64,7 +64,7 @@ This plugin will allow you to make outbound calls through your brands. The brand
 3. Go to your flex console >> Search for `Assets`.
 4. Add this file that you created above as an Assets.
 5. Once the Asset is deployed, copy the URL of the Assets. Please refer the screenshot below : 
-![Assets screenshot](./resources/Assets.png) 
+![Assets screenshot](https://github.com/cherylmj01/plugin-outbound-brand/blob/main/src/resources/Assets.png) 
 
 6. Paste this URL in the file named `BrandNumberState.js` which can be found under the state folder in this repository
 
