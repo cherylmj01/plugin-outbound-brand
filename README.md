@@ -66,7 +66,7 @@ This plugin will allow you to make outbound calls through your brands. The brand
 5. Once the Asset is deployed, copy the URL of the Assets. Please refer the screenshot below : 
 ![Assets screenshot](https://github.com/cherylmj01/plugin-outbound-brand/blob/main/src/resources/Assets.png) 
 
-6. Paste this URL in the file named `BrandNumberState.js` which can be found under the state folder in this repository
+6. Paste this URL in the file named `BrandNumberState.js` which can be found under the `state` folder in this repository
 
 ## Step 2: Download Plugin Code
 
