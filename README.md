@@ -58,7 +58,7 @@ This plugin will allow you to make outbound calls through your brands. The brand
     "GreenDot": "+19382010447",
     "Walmart": "+17622635405",
     "Target": "+16789045659"
-}
+    }
     ```
 
 3. Go to your flex console >> Search for `Assets`.
