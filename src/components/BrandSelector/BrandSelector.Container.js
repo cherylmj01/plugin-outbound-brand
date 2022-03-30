@@ -9,7 +9,7 @@ import BrandSelector from './BrandSelector';
 
 // Define mapping functions
 const mapStateToProps = (state) => {
-  console.log("TEST123123123123123123 STATE", state)
+  //console.log("CURRENT STATE IS:", state);
   return {
     selectedBrand: state["outbound-brand"].BrandSelector.brandsNumber,
     numberList: state["outbound-brand"].BrandSelector.brandNumberList
@@ -18,7 +18,6 @@ const mapStateToProps = (state) => {
   
 const mapDispatchToProps = (dispatch) => ({
     updateBrand: bindActionCreators(Actions.updateBrand, dispatch),
-    getNumbers: bindActionCreators(Actions.getPhoneNumbers, dispatch)
 });
 
 // Connect presentational component to Redux

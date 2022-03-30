@@ -9,11 +9,7 @@ class BrandSelector extends React.Component {
 
     constructor(props){        
         super(props);
-        this.props.getNumbers();
-    }
 
-    componentDidMount() {
-        this.props.getNumbers();
     }
 
     render() {

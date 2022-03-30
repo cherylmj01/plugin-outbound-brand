@@ -13,6 +13,6 @@ function registerCustomNotifications(flex, manager) {
 	flex.Notifications.registerNotification({
 		id: CustomNotifications.BrandNotification,
 		type: Flex.NotificationType.error,
-		content: "Brand is not selected"
+		content: "Brand is not selected. Please select a brand to make a call."
 	});
 }

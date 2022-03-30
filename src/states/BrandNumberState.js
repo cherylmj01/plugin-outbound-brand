@@ -15,7 +15,7 @@ const initialState = {
       return `Error: ${err}`;
     });
   }
-
+  
   export class Actions {
 
     static updateBrand = (brand) => ({
@@ -36,7 +36,7 @@ const initialState = {
 
   export function reduce(state = initialState, action) {
   
-    console.log('Test789',action,action.type);
+    // console.log('ACTION_CALLED',action,action.type);
 
     switch (action.type){
       
@@ -60,7 +60,7 @@ const initialState = {
       }
 
       case `${GET_PHONE_NUMBER}_FULFILLED`: {
-        console.log("IMPORTANT123123", action)
+        // console.log("PHONE NUMBERS WERE LOADED", action)
         return {
           ...state,
           brandNumberList: action.payload,
