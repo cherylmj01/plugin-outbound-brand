@@ -46,9 +46,12 @@ export default class OutboundBrandPlugin extends FlexPlugin {
           Notifications.showNotification(CustomNotifications.BrandNotification,null);
           reject("Brand is not selected. Please select a brand to make a call.");
         }
-        // Either use the brand selector or the default caller id
+        
+        // store the selected brand and default caller ID for the logic to make an outbound call below
         let brand_selected = String(manager.store.getState()["outbound-brand"].BrandSelector.brandsNumber)
         let default_caller_id = payload.callerId;
+
+        // Either use the brand selector or the default caller id
         if (brand_selected != '') {
           resolve(brand_selected);
         } else {

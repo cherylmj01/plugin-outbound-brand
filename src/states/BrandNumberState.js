@@ -70,7 +70,8 @@ const initialState = {
             error: action.payload,
             response_status: 'Error'
           };
-        } else {
+        } 
+        else {
           return {
             ...state,
             brandNumberList: action.payload,

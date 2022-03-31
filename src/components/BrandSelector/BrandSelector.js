@@ -22,11 +22,11 @@ class BrandSelector extends React.Component {
             callerIdsArray.push(m)
         }
 
-        // For errors, display a notification (This causes a warning)
+        // If an error is encountered , then don't load the component
         if (response_status === 'Error'){            
             return <div></div>;
         }
-        // Populate the choices of brands as a select tag
+        //else load the component and Populate the choices of brands as a select tag
         else {
             return(
                 <div>
@@ -39,7 +39,6 @@ class BrandSelector extends React.Component {
                     <StyledSelect value={String(this.props.selectedBrand) || callerIdsArray[0]}
                                   onChange={(e) => this.props.updateBrand(e.target.value)}>
                             <MenuItem key="placeholder" value="placeholder" disabled>Select Brand</MenuItem>
-                            
                             {callerIdsArray.map( (element) => ( 
                             <MenuItem key={element} value={callerIds[element]}>
                             {element}

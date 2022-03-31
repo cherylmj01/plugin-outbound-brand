@@ -22,10 +22,4 @@ function registerCustomNotifications(flex, manager) {
 		type: Flex.NotificationType.error,
 		content: "The brand list was unable to load."
 	});	
-
-	flex.Notifications.registerNotification({
-		id: CustomNotifications.BrandErrorNotification,
-		type: Flex.NotificationType.error,
-		content: "The brand caller ID configuration cannot be read."
-	});
 }
