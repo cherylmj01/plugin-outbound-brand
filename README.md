@@ -65,8 +65,7 @@ This plugin will allow you to make outbound calls through your brands. The brand
 4. Add this file that you created above as an Assets.
 5. Once the Asset is deployed, copy the URL of the Assets. Please refer the screenshot below : 
 ![Assets screenshot](https://github.com/cherylmj01/plugin-outbound-brand/blob/main/src/resources/Assets.png) 
-
-6. Paste this URL in the file named `BrandNumberState.js` which can be found under the `state` folder in this repository
+6. Paste this URL in the `.env` file within this repository.
 
 ## Step 2: Download Plugin Code
 
@@ -83,8 +82,18 @@ GitHub provides several options for downloading this source code:
 ## Step 3: Install Dependencies
 
 1. Once the plugin code has been downloaded to your development environment, open a Command Line interface and `cd` into the root code directory.
-2. Once in the root plugin code directory run the following in Command Line: `npm install` or `npm i`
-3. All of the code dependencies are installed and you may now start building and running your code locally.
+2. Copy the `.env.example` to `.env` and populate the environment variable with your asset file link:
+
+  ```bash
+    cp .env.example .env
+  ```
+3. Copy the `public/appConfig.example.js` to `public/appConfig.js` :
+
+  ```bash
+    cp public/appConfig.example.js public/appConfig.js
+  ```
+4. Once in the root plugin code directory run the following in Command Line: `npm install` or `npm i`
+5. All of the code dependencies are installed and you may now start building and running your code locally.
 
 ## Step 4: Run Plugin Locally
 
@@ -104,9 +113,9 @@ The `twilio flex:plugins:release` command is used to change which plugins are li
 
 See the [Deploy and Release documentation](https://www.twilio.com/docs/flex/developer/plugins/cli/deploy-and-release) for full detailed instructions.
 
-## How this plugin works ?
+## How does this plugin work ?
 
-This plugin will retrieve information from the provided asset link and it will display the brands in a component within the dialpad. When an agent selects the brand to make a call. A call will be made from the number that is mapped to that brand within the Twilio asset.
+This plugin will retrieve information from the provided asset link and it will display the brands in a component within the dialpad. When an agent selects the brand to make a call, a call will be made from the number that is mapped to that brand within the Twilio asset. If the brand list is not able to load for some reason, then the agent will be notified however the agent will still be able to make a call using the default caller ID.
 
 
 

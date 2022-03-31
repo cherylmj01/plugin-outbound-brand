@@ -20,6 +20,7 @@ function registerCustomNotifications(flex, manager) {
 	flex.Notifications.registerNotification({
 		id: CustomNotifications.BrandLoadNotification,
 		type: Flex.NotificationType.error,
-		content: "The brand list was unable to load."
+		content: "The brand list for the outbound dialer was unable to load.",
+		timeout: 20000
 	});	
 }
