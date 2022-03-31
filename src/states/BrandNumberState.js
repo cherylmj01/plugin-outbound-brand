@@ -1,3 +1,6 @@
+import { Notifications } from '@twilio/flex-ui';
+import { CustomNotifications } from '../notifications';
+
 const UPDATE_DIALER_BRAND = "UPDATE_BRAND";
 const SET_DIALER_DESTINATION = "DIALER_DESTINATION";
 const GET_PHONE_NUMBER = "GET_PHONE_NUMBER";
@@ -61,6 +64,7 @@ const initialState = {
 
       case `${GET_PHONE_NUMBER}_FULFILLED`: {
         if (String(action.payload).startsWith('Error: ')) {
+          Notifications.showNotification(CustomNotifications.BrandLoadNotification, null)
           return {
             ...state,
             error: action.payload,
@@ -76,6 +80,7 @@ const initialState = {
       }
 
       case `${GET_PHONE_NUMBER}_REJECTED`: {
+        Notifications.showNotification(CustomNotifications.BrandLoadNotification, null)
         return {
           ...state,
           error: action.payload.error,

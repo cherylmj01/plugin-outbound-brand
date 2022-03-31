@@ -3,8 +3,6 @@ import React from "react";
 import { StyledSelect, Caption } from "./BrandSelector.Styles";
 
 import MenuItem from "@material-ui/core/MenuItem";
-import { Notifications } from '@twilio/flex-ui';
-import { CustomNotifications } from '../../notifications';
 
 // import * as Flex from "@twilio/flex-ui";
 
@@ -24,9 +22,8 @@ class BrandSelector extends React.Component {
             callerIdsArray.push(m)
         }
 
-        // For errors, display a notification
-        if (response_status === 'Error'){
-            Notifications.showNotification(CustomNotifications.BrandLoadNotification, null)
+        // For errors, display a notification (This causes a warning)
+        if (response_status === 'Error'){            
             return <div></div>;
         }
         // Populate the choices of brands as a select tag
