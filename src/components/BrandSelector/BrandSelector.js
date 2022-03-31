@@ -27,7 +27,7 @@ class BrandSelector extends React.Component {
         // For errors, display a notification
         if (response_status === 'Error'){
             Notifications.showNotification(CustomNotifications.BrandLoadNotification, null)
-            return;
+            return <div></div>;
         }
         // Populate the choices of brands as a select tag
         else {

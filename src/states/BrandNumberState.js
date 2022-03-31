@@ -60,7 +60,6 @@ const initialState = {
       }
 
       case `${GET_PHONE_NUMBER}_FULFILLED`: {
-        console.log("PHONE NUMBERS WERE LOADED", action)
         if (String(action.payload).startsWith('Error: ')) {
           return {
             ...state,
@@ -88,4 +87,3 @@ const initialState = {
         return state;      
     }
   }
-  
