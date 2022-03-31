@@ -7,7 +7,7 @@
   },
   "dependencies": {
     "@twilio/flex-plugin-scripts": "5.0.4",
-    "axios": "^0.26.1",
+    "dotenv-webpack": "^7.1.0",
     "react": "16.5.2",
     "react-dom": "16.5.2",
     "react-emotion": "9.2.12",
@@ -16,6 +16,7 @@
   },
   "devDependencies": {
     "@twilio/flex-ui": "^1",
+    "dotenv": "^16.0.0",
     "react-test-renderer": "16.5.2"
   }
 }

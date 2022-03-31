@@ -3,13 +3,15 @@ const SET_DIALER_DESTINATION = "DIALER_DESTINATION";
 const GET_PHONE_NUMBER = "GET_PHONE_NUMBER";
 
 const initialState = {
-    brandsNumber: {},
+    brandsNumber: '',
     isConfirmed: false,
+    response_status: 'Pending',
     brandNumberList: {},
+    error: ''
   };
 
   function getBrandNumberList() {
-    return fetch('https://scarlet-salmon-5915.twil.io/assets/BrandNumbers.json')
+    return fetch(process.env.REACT_BRAND_NUMBERS)
     .then((response) => response.json())
     .catch((err) => {
       return `Error: ${err}`;
@@ -31,13 +33,11 @@ const initialState = {
     static getPhoneNumbers = () => ({
       type: GET_PHONE_NUMBER,
       payload: getBrandNumberList(),
-    });
+    })
   }
 
   export function reduce(state = initialState, action) {
   
-    // console.log('ACTION_CALLED',action,action.type);
-
     switch (action.type){
       
       case UPDATE_DIALER_BRAND: {
@@ -60,22 +60,32 @@ const initialState = {
       }
 
       case `${GET_PHONE_NUMBER}_FULFILLED`: {
-        // console.log("PHONE NUMBERS WERE LOADED", action)
-        return {
-          ...state,
-          brandNumberList: action.payload,
-        };
+        console.log("PHONE NUMBERS WERE LOADED", action)
+        if (String(action.payload).startsWith('Error: ')) {
+          return {
+            ...state,
+            error: action.payload,
+            response_status: 'Error'
+          };
+        } else {
+          return {
+            ...state,
+            brandNumberList: action.payload,
+            response_status: 'Okay'
+          };
+        } 
       }
 
       case `${GET_PHONE_NUMBER}_REJECTED`: {
         return {
           ...state,
           error: action.payload.error,
+          response_status: 'Error'
         };
       }
    
       default:
         return state;      
     }
-
   }
+  

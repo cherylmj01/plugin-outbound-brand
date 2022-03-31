@@ -1,12 +1,13 @@
 import * as Flex from '@twilio/flex-ui';
 
-
 export default (flex, manager) => {
 	registerCustomNotifications(flex, manager);
 }
 
 export const CustomNotifications = {
-	BrandNotification: "BrandNotSelected"
+	BrandNotification: "BrandNotSelected",
+	BrandErrorNotification: "BrandListNotConfigured",
+	BrandLoadNotification: "BrandLoadNotification"
 }
 
 function registerCustomNotifications(flex, manager) {
@@ -14,5 +15,17 @@ function registerCustomNotifications(flex, manager) {
 		id: CustomNotifications.BrandNotification,
 		type: Flex.NotificationType.error,
 		content: "Brand is not selected. Please select a brand to make a call."
+	});
+
+	flex.Notifications.registerNotification({
+		id: CustomNotifications.BrandLoadNotification,
+		type: Flex.NotificationType.error,
+		content: "The brand list was unable to load."
+	});	
+
+	flex.Notifications.registerNotification({
+		id: CustomNotifications.BrandErrorNotification,
+		type: Flex.NotificationType.error,
+		content: "The brand caller ID configuration cannot be read."
 	});
 }

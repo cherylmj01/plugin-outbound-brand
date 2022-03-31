@@ -14,7 +14,6 @@ export default class OutboundBrandPlugin extends FlexPlugin {
   constructor() {
     super(PLUGIN_NAME);
   }
-
   /**
    * This code is run when your plugin is being started
    * Use this to modify any UI components or attach to the actions framework
@@ -24,43 +23,43 @@ export default class OutboundBrandPlugin extends FlexPlugin {
    */
   async init(flex, manager) {
     this.registerReducers(manager);
-    
+   
     // Get the numbers from the asset
     this.dispatch(Actions.getPhoneNumbers());
 
     // Register the notification
     registerCustomNotifications(flex, manager); 
     
-    // Add the dialpad component
+    // Add the dialpad component including the new brand selector component
     flex.OutboundDialerPanel.Content.add(
       <BrandSelectorContainer key="number-selector" />,
       { sortOrder: 1 }
     );
      
-    // Logic for how to place the outbound call
+    // Update the outbound call logic to use the brand caller id from the new brand selector
     flex.Actions.replaceAction("StartOutboundCall", (payload, original) => {
 
       return new Promise((resolve, reject) => {
-        if (payload.callerId) {
-          resolve(payload.callerId);
-          return;
-        }
-        if (!manager.store.getState()["outbound-brand"].BrandSelector.isConfirmed){
-          
+        // If brand caller ids populated and none are selected, create a notification instead of a call.
+        if (!manager.store.getState()["outbound-brand"].BrandSelector.isConfirmed 
+        && manager.store.getState()["outbound-brand"].BrandSelector.response_status === 'Okay'){          
           Notifications.showNotification(CustomNotifications.BrandNotification,null);
           reject("Brand is not selected. Please select a brand to make a call.");
         }
-        resolve(
-          manager.store.getState()["outbound-brand"].BrandSelector.brandsNumber
-        );
+        // Either use the brand selector or the default caller id
+        let brand_selected = String(manager.store.getState()["outbound-brand"].BrandSelector.brandsNumber)
+        let default_caller_id = payload.callerId;
+        if (brand_selected != '') {
+          resolve(brand_selected);
+        } else {
+          resolve(default_caller_id);
+        }
       }).then((callerId) => {
         original({ ...payload, callerId: callerId });
-      }); 
+      });
 
     });
-
   }
-
   dispatch = (f) => Flex.Manager.getInstance().store.dispatch(f);
 
   /**
@@ -74,7 +73,6 @@ export default class OutboundBrandPlugin extends FlexPlugin {
       console.error(`You need FlexUI > 1.9.0 to use built-in redux; you are currently on ${VERSION}`);
       return;
     }
-
     manager.store.addReducer(namespace, reducers);
   }
 }

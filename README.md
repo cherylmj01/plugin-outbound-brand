@@ -46,9 +46,9 @@ This plugin will allow you to make outbound calls through your brands. The brand
 2. Within this file add the brand and their corresponding number as shown below: 
     ```bash
     {
-    "Brand 1": "Add a valid registered number for GreenDot",
-    "Brand 2": "Add a valid registered number for Walmart",
-    "Brand 3": "Add a valid registered number for Target"
+    "Brand 1": "Add a valid registered number for Brand 1",
+    "Brand 2": "Add a valid registered number for Brand 2",
+    "Brand 3": "Add a valid registered number for Brand 3"
     }
     ```
     Here is an example of what this file would look with actual data : 

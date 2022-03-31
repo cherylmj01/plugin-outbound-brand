@@ -6,16 +6,16 @@ import { bindActionCreators } from 'redux';
 import { Actions } from '../../states/BrandNumberState';
 import BrandSelector from './BrandSelector';
 
-
 // Define mapping functions
 const mapStateToProps = (state) => {
-  //console.log("CURRENT STATE IS:", state);
   return {
     selectedBrand: state["outbound-brand"].BrandSelector.brandsNumber,
-    numberList: state["outbound-brand"].BrandSelector.brandNumberList
+    numberList: state["outbound-brand"].BrandSelector.brandNumberList,    
+    response_status: state["outbound-brand"].BrandSelector.response_status
   }
 };
-  
+
+// Allows actions to be run from the component with updateBrands()
 const mapDispatchToProps = (dispatch) => ({
     updateBrand: bindActionCreators(Actions.updateBrand, dispatch),
 });
